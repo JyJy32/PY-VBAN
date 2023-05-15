@@ -3,7 +3,7 @@ import pyaudio
 from decoder import udp_decode
 from data import Data, Header
 
-UDP_IP = "192.168.1.11" # TODO: either ask for input or get ip in code
+UDP_IP = input("this device's IP: ")
 UDP_PORT = 8080
 
 sock = socket.socket(socket.AF_INET, socket.SOCK_DGRAM)
@@ -23,7 +23,7 @@ stream.start_stream()
 
 while True:
     data = udp_decode(sock.recvfrom(1500)[0])
-    print(data.header)
+    #print(data.header)
     if not data:
         break
     stream.write(data.data)
