@@ -31,7 +31,7 @@ def udp_decode(encode: bytes):
     print(hex_string)"""
     
     d = Data(h, encode[28:])
-    # print(d) # debug
+    print(d) # debug
     
     
 def byte_to_bits(byte: int) -> list[int]:
