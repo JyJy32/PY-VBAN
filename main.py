@@ -3,7 +3,7 @@ import pyaudio
 from decoder import udp_decode
 from data import Data, Header
 
-UDP_IP = "192.168.1.5" # TODO: either ask for input or get ip in code
+UDP_IP = "192.168.1.11" # TODO: either ask for input or get ip in code
 UDP_PORT = 8080
 
 sock = socket.socket(socket.AF_INET, socket.SOCK_DGRAM)
