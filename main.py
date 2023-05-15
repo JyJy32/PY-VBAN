@@ -9,11 +9,6 @@ UDP_PORT = 8080
 sock = socket.socket(socket.AF_INET, socket.SOCK_DGRAM)
 sock.bind((UDP_IP, UDP_PORT))
 
-def callback(in_data, frame_count, time_info, status):
-    print("callback")
-    data = udp_decode(sock.recvfrom(1500)[0])
-    return (data.data, pyaudio.paContinue)
-
 # PyAudio object.
 audio = pyaudio.PyAudio()
 
