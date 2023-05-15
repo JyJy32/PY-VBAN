@@ -1,6 +1,6 @@
 from data import *
 
-def udp_decode(encode: bytes):
+def udp_decode(encode: bytes) -> Data:
     vban = encode[0:4].decode("utf-8")
     # sample rate and sub protocol
     bits = byte_to_bits(encode[4])
@@ -32,6 +32,7 @@ def udp_decode(encode: bytes):
     
     d = Data(h, encode[28:])
     print(d) # debug
+    return d
     
     
 def byte_to_bits(byte: int) -> list[int]:
