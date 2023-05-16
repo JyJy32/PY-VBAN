@@ -1,1 +1,1 @@
-Very simple VBAN receiver written in python
+Very simple VBAN receiver and transmitter written in python
