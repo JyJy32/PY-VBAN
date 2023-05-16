@@ -1,4 +1,5 @@
 from data import *
+from tools import *
 
 def udp_decode(encode: bytes) -> Data:
     vban = encode[0:4].decode("utf-8")
@@ -34,23 +35,3 @@ def udp_decode(encode: bytes) -> Data:
     # print(d) # debug
     return d
     
-    
-def byte_to_bits(byte: int) -> list[int]:
-    power_of_2 = [128, 64, 32, 16, 8, 4, 2, 1]
-    bits = []
-    for power in power_of_2:
-        if byte >= power:
-            bits.append(1)
-            byte -= power
-        else:
-            bits.append(0)
-    return bits
-
-def bits_to_int(bits: list[int]) -> int:
-    value = 0
-    for index, bit in enumerate(bits):
-        value += bit * 2 ** (len(bits) - index - 1)
-    return value
-
-def u32_decode(encode: bytes) -> int:
-    return int.from_bytes(encode, byteorder="little", signed=False)

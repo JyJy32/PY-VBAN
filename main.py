@@ -1,29 +1,12 @@
-import socket
-import pyaudio
-from decoder import udp_decode
-from data import Data, Header
+from receiver.main import *
+from sender.main import *
+from tools import *
+import threading
 
-UDP_IP = input("this device's IP: ")
-UDP_PORT = 8080
+listener = VBAN_receiver(ip= "192.168.1.11", port= 6980)
+threading.Thread(target=listener.start_stream).start()
 
-sock = socket.socket(socket.AF_INET, socket.SOCK_DGRAM)
-sock.bind((UDP_IP, UDP_PORT))
+sender = VBAN_transmitter(ip="192.168.1.5", port= 6980)
+threading.Thread(target=sender.start_stream).start()
 
-# PyAudio object.
-audio = pyaudio.PyAudio()
-
-stream_format = pyaudio.get_format_from_width(2)
-stream = audio.open(format=stream_format, channels=2, rate=44100, output=True)
-stream.start_stream() 
-
-while True:
-    data = udp_decode(sock.recvfrom(1500)[0])
-    #print(data.header)
-    if not data:
-        break
-    stream.write(data.data)
-    
-sock.close()
-stream.stop_stream()
-stream.close()
-audio.terminate()
+# print(int.from_bytes(bits_to_byte(int_to_bits(0, 4) + "0" + int_to_bits(1, 3)), byteorder="big"))
