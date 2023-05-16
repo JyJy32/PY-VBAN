@@ -62,6 +62,9 @@ class Header:
     def __str__(self) -> str:
         return f"{self.vban} with {self.sample_rate}Hz and {self.channels} channels"
     
+    def display_full(self) -> str:
+        return f"{self.vban} with {self.sample_rate}Hz and {self.channels} channels\nsub_protocol: {self.sub_protocol}\nsamples_per_frame: {self.samples_per_frame}\nbit_resolution: {self.bit_resolution}\ncodec: {self.codec}\nstream_name: {self.stream_name}\nframe_counter: {self.frame_counter}"
+    
     def as_bytes(self) -> bytes:
         # Encode the header values into a byte array
         header_bytes = bytearray()
