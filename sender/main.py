@@ -11,14 +11,15 @@ class VBAN_transmitter():
         self.sock = socket.socket(socket.AF_INET, socket.SOCK_DGRAM)
         
         self.header = Header("VBAN", 16, 0, 255, 2, 1, 0, "Stream1", 0)
-        print(self.header.as_bytes())
+        # print(self.header.as_bytes())
+        print(f"VBAN transmitter initialized with IP: {self.ip} and port: {self.port}")
         audio = pyaudio.PyAudio()
-        self.stream = audio.open(format=pyaudio.paInt16, channels=2, rate=44100, input=True, frames_per_buffer=1024)
+        self.stream = audio.open(format=pyaudio.paInt16, channels=2, rate=44100, input=True, frames_per_buffer=256)
         
     
     def start_stream(self):
         while True:
-            data = self.stream.read(1024)
+            data = self.stream.read(256)
             packet = udp_encode(self.header, data)
             self.sock.sendto(packet, (self.ip, self.port))
             self.header.frame_counter += 1
