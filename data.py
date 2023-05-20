@@ -26,7 +26,7 @@ SAMPLE_RATES = [
 
 
 class Header:
-    # TODO: add sender address
+    sender: str
     vban: str
     sample_rate: int
     sub_protocol: int
@@ -39,6 +39,7 @@ class Header:
 
     def __init__(
         self,
+        sender: str,
         vban: str,
         sample_rate: int,
         sub_protocol: int,
@@ -49,6 +50,7 @@ class Header:
         stream_name: str,
         frame_counter: int,
     ) -> None:
+        self.sender = sender
         self.vban = vban
         self.sample_rate = SAMPLE_RATES[sample_rate]
         self.sub_protocol = sub_protocol

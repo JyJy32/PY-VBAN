@@ -1,7 +1,7 @@
 from data import *
 from tools import *
 
-def udp_decode(encode: bytes) -> Data:
+def udp_decode(encode: bytes, addr: str) -> Data:
     vban = encode[0:4].decode("utf-8")
     # sample rate and sub protocol
     bits = byte_to_bits(encode[4])
@@ -26,7 +26,7 @@ def udp_decode(encode: bytes) -> Data:
     # frame counter
     frame_counter = u32_decode(encode[24:28])
     
-    h = Header(vban, sample_rate, sub_protocol, sample_per_frame, channels, bit_resolution, codec, stream_name, frame_counter)
+    h = Header(addr, vban, sample_rate, sub_protocol, sample_per_frame, channels, bit_resolution, codec, stream_name, frame_counter)
     # rest of the packet
     """ hex_string = "".join(format(b, '02X') for b in encode[28:])
     print(hex_string)"""

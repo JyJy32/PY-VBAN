@@ -10,7 +10,7 @@ class VBAN_transmitter():
         self.port: int = port
         self.sock = socket.socket(socket.AF_INET, socket.SOCK_DGRAM)
         
-        self.header = Header("VBAN", 16, 0, 255, 2, 1, 0, "Stream1", 0)
+        self.header = Header("192.168.1.11", "VBAN", 16, 0, 255, 2, 1, 0, "Stream1", 0)
         # print(self.header.as_bytes())
         print(f"VBAN transmitter initialized with IP: {self.ip} and port: {self.port}")
         audio = pyaudio.PyAudio()
